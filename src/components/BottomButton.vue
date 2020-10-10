@@ -20,5 +20,6 @@ export default {
 	right: 0;
 	background: #fff;
 	border: 1px solid #dfe4ea;
+	z-index: 2;
 }
 </style>

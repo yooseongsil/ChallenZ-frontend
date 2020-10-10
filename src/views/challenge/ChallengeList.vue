@@ -40,6 +40,9 @@
 
 <script>
 import axios from 'axios';
+import Icon from '@/components/Icon';
+import Typography from '@/components/Typography';
+
 export default {
 	name: 'ChallengeList',
 	data: () => ({
@@ -143,6 +146,7 @@ export default {
 		width: 100%;
 		z-index: 10;
 		height: 62px;
+		background: $white;
 		p {
 			line-height: 62px;
 		}
