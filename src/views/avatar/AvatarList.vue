@@ -26,7 +26,7 @@
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<BottomButton>
-						<vs-button block size="xl" @click="createChallenge"> Finish</vs-button>
+						<vs-button block size="xl" @click="createChallenge">Finish</vs-button>
 					</BottomButton>
 				</vs-col>
 			</vs-row>

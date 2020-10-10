@@ -38,7 +38,7 @@
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="6">
 					<BottomButton @click="handleButtonClick">
-						<vs-button block size="xl"> next</vs-button>
+						<vs-button block size="xl">Next</vs-button>
 					</BottomButton>
 				</vs-col>
 			</vs-row>
