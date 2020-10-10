@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .display1 {
 	font-size: 42px;
 	line-height: 120%;
