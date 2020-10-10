@@ -4,12 +4,12 @@
 			<vs-row>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="center content-inputs mt-20 mb-20">
-						<vs-input v-model="challengeTitle" label="Text" placeholder="Trying new recipes." />
+						<vs-input v-model="challengeTitle" label="Challenge Name" placeholder="Trying new recipes." />
 					</div>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="clearfix  mb-20" style="padding-left: 10px">
-						<typography element="p" class="float-left" type="caption1" color="black"> All day</typography>
+						<typography element="p" class="float-left" type="caption" color="black"> All day</typography>
 
 						<div style="width: 50px" class="float-right">
 							<vs-switch v-model="allDay" />
@@ -68,9 +68,22 @@ export default {
 	},
 	created() {
 		this.setHeaderTitle('Create a challenge');
+
+		// tutorial challenge name
+		const tutorialChallengeName = this.$route.query.challenge_name;
+		if (tutorialChallengeName) {
+			this.setTutorialChallengeName(tutorialChallengeName);
+		}
 	},
 	methods: {
 		...mapMutations(['setHeaderTitle']),
+		setTutorialChallengeName(challengeName) {
+			const challengeNameList = {
+				Workout: '',
+				Hobby: '',
+			};
+			this.challengeTitle = challengeNameList[challengeName];
+		},
 		handleButtonClick() {
 			return this.getTutorialPassed ? this.createChallenge() : this.next();
 		},
