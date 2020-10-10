@@ -4,7 +4,6 @@ import Home from '../views/Home.vue';
 import ChallengeCreate from '@/views/challenge/ChallengeCreate';
 import ChallengeList from '@/views/challenge/ChallengeList';
 import ChallengeDetail from '@/views/challenge/ChallengeDetail';
-import AvatarCreate from '@/views/avatar/AvatarCreate';
 import AvatarList from '@/views/avatar/AvatarList';
 import AvatarDetail from '@/views/avatar/AvatarDetail';
 
@@ -41,15 +40,6 @@ const routes = [
 		path: '/challenge/detail/:id',
 		name: 'ChallengeDetail',
 		component: ChallengeDetail,
-		meta: {
-			title: '',
-			detailPage: true,
-		},
-	},
-	{
-		path: '/avatar/create/:id?',
-		name: 'AvatarCreate',
-		component: AvatarCreate,
 		meta: {
 			title: '',
 			detailPage: true,
