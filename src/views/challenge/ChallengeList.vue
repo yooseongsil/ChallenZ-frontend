@@ -9,12 +9,12 @@
 			<button type="button" class="btn btn_next" @click="clickNext"></button>
 		</header>
 		<div class="challengeList_body">
-			<vs-card v-for="list in challengeList" :key="list.title" type="3" class="mb-20">
+			<vs-card v-for="list in challengeList" :key="list.title" type="3" class="mb-20" @click="goDetail(list._id)">
 				<template #title>
 					<h3>{{ list.title }}</h3>
 				</template>
 				<template #img>
-					<img :src="list.imgUrl" alt="" />
+					<img :src="list.avatar.avatarUrl" alt="" />
 				</template>
 				<template #text>
 					<p>
@@ -39,12 +39,14 @@
 </template>
 
 <script>
+import routeMixin from '../../mixins/routeMixin';
 import axios from 'axios';
 import Icon from '@/components/Icon';
 import Typography from '@/components/Typography';
 
 export default {
 	name: 'ChallengeList',
+	mixins: [routeMixin],
 	data: () => ({
 		targetDate: null,
 		targetYear: null,
@@ -78,12 +80,15 @@ export default {
 		this.targetMonth = new Date().getUTCMonth() + 1;
 		this.targetDay = new Date().getUTCDay();
 		this.targetDayNumber = this.targetDay;
+		this.getChallengeList();
 	},
 	mounted() {
 		this.checkDay();
-		this.getChallengeList();
 	},
 	methods: {
+		goDetail(id) {
+			this.$_routeMixin_go_page(`/challenge/${id}`);
+		},
 		checkDay() {
 			switch (this.targetDayNumber) {
 				case 0:
@@ -128,7 +133,10 @@ export default {
 		getChallengeList() {
 			axios
 				.get('challengeList')
-				.then(res => console.log(res))
+				.then(res => {
+					console.log(res);
+					this.challengeList = res.data;
+				})
 				.catch(err => console.log(err));
 		},
 	},
