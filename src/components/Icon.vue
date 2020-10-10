@@ -6,6 +6,7 @@
 
 <script>
 import IconMoreMenu from '@/assets/images/icon/more-menu.svg?inline';
+import IconTrash from '@/assets/images/icon/icon-trash.svg?inline';
 
 import { colors } from '@/components/color';
 
@@ -78,6 +79,7 @@ export default {
 	},
 	components: {
 		IconMoreMenu,
+		IconTrash,
 	},
 };
 </script>
