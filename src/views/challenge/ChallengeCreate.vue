@@ -68,7 +68,7 @@ export default {
 
 <style scoped lang="scss">
 #ChallengeCreate {
-	padding: 0 24px;
+	padding: 0 24px 50px 24px;
 	/deep/ .vs-input {
 		width: 100% !important;
 	}
