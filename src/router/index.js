@@ -5,7 +5,6 @@ import ChallengeCreate from '@/views/challenge/ChallengeCreate';
 import ChallengeList from '@/views/challenge/ChallengeList';
 import ChallengeDetail from '@/views/challenge/ChallengeDetail';
 import AvatarList from '@/views/avatar/AvatarList';
-import AvatarDetail from '@/views/avatar/AvatarDetail';
 
 Vue.use(VueRouter);
 
@@ -49,15 +48,6 @@ const routes = [
 		path: '/avatar/list',
 		name: 'AvatarList',
 		component: AvatarList,
-		meta: {
-			title: '',
-			detailPage: true,
-		},
-	},
-	{
-		path: '/avatar/detail/:id',
-		name: 'AvatarDetail',
-		component: AvatarDetail,
 		meta: {
 			title: '',
 			detailPage: true,
