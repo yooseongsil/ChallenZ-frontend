@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "Z": [
+        "Hi",
+        "I am Z,<br />your daily care companion"
+      ],
+      "User": [
+        "Hello 👋"
+      ]
+    },
+    {
+      "Z": [
+        "Nice to meet you!",
+        "Let me introduce myself"
+      ],
+      "User": [
+        "Good",
+        "It's fine"
+      ]
+    },
+    {
+      "Z": [
+        "I am a friendly customizale bot made by ChallengeZ team.",
+        "I will give you daily missions and do my best to help you impove your daily life and kill procrastination!"
+      ],
+      "User": ["Nice"]
+    },
+    {
+      "Z": ["Let's get started"],
+      "User": ["Let's do it"]
+    },
+    {
+      "Z": ["Are you suffering from procastinanting and you want to overcome it?"],
+      "User": ["Yes, help me overcome my youtube addiction!"]
+    },
+    {
+      "Z": [
+        "Cool, I am willing to help you with your problem",
+        "What is the thing you want to to get done but you keep delaying"
+      ]
+    }
+  ]
+}

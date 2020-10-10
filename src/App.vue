@@ -8,13 +8,13 @@
 				</vs-col>
 			</vs-row>
 		</div>
-		<Footer />
+		<!--		<Footer />-->
 	</div>
 </template>
 
 <script>
 import Header from '@/layouts/Header';
-import Footer from '@/layouts/Footer';
+// import Footer from '@/layouts/Footer';
 
 export default {
 	mounted() {
@@ -22,7 +22,10 @@ export default {
 			this.$store.commit('setTutorialPassed', true);
 		}
 	},
-	components: { Footer, Header },
+	components: { 
+    Header,
+    // Footer,
+  },
 };
 </script>
 
@@ -31,7 +34,7 @@ export default {
 	padding-top: 80px !important;
 	overflow-x: hidden;
 	-ms-overflow-x: hidden;
-	height: 100%;
+	height: 100vh;
 
 	@include pc {
 		padding-top: 80px !important;
