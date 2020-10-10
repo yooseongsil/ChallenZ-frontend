@@ -2,7 +2,7 @@
 	<header class="center grid">
 		<vs-row align="center" justify="center" class="header_container">
 			<vs-col vs-type="flex" vs-align="center" w="11" class="flex justify-content-flex-end">
-				<!-- badge badge-position="top-right" -->
+				<!-- todo: badge badge-position="top-right" -->
 				<vs-avatar color="#FFFFFF" size="32">
 					<Icon name="IconMoreMenu" />
 				</vs-avatar>
