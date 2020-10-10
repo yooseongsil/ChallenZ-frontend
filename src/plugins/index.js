@@ -1,1 +1,2 @@
 import './vusax';
+import './scrollTo';
