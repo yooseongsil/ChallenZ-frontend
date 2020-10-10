@@ -12,7 +12,7 @@
 				</div>
 				<div class="flex align-items-center">
 					<!-- todo: badge badge-position="top-right" -->
-					<vs-avatar v-if="!isDetailPage" color="#FFFFFF" size="32">
+					<vs-avatar v-if="isHomePage" color="#FFFFFF" size="32">
 						<Icon name="IconMoreMenu" />
 					</vs-avatar>
 					<div v-if="challengeCreateStepTitle">
@@ -40,6 +40,9 @@ export default {
 		},
 		challengeCreateStepTitle() {
 			return this.$route.meta.createStepTitle;
+		},
+		isHomePage() {
+			return this.$route.name === 'Home';
 		},
 	},
 	components: {

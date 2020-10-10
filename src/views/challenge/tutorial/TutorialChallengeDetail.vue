@@ -2,9 +2,9 @@
 	<div>
 		<vs-row align="center" justify="center">
 			<vs-col vs-type="flex" vs-align="center" w="11">
-				<vs-row>
+				<vs-row id="TutorialChallengeDetail">
 					<template v-for="(tutorialItem, index) in tutorialItems">
-						<template v-if="index <= chatIndex">
+						<template v-if="index <= chatStep">
 							<vs-col :key="`col-${index}`" class="flex flex-row">
 								<vs-avatar
 									v-if="tutorialItem.Z"
@@ -18,7 +18,12 @@
 								</vs-avatar>
 								<vs-row>
 									<!-- Z chat -->
-									<vs-row v-for="(zItem, zIndex) in tutorialItem.Z" :key="`z-chat-balloon-${zIndex}`">
+									<!--									<transition-group name="z-chat-list" tag="span">-->
+									<vs-row
+										v-for="(zItem, zIndex) in tutorialItem.Z"
+										:key="`z-chat-balloon-${zIndex}`"
+										class="z-chat-list-item"
+									>
 										<ChatBalloon
 											class="mb-12"
 											:class="{ 'mb-40': zIndex + 1 === tutorialItem.Z.length }"
@@ -30,6 +35,8 @@
 											</template>
 										</ChatBalloon>
 									</vs-row>
+									<!--									</transition-group>-->
+
 									<!-- User chat -->
 									<vs-row
 										v-for="(userItem, userIndex) in tutorialItem.User"
@@ -37,7 +44,7 @@
 										class="flex justify-content-flex-end"
 									>
 										<ChatBalloon
-											v-if="index < chatIndex"
+											v-if="index < chatStep"
 											class="mb-12"
 											:class="{ 'mb-40': userIndex + 1 === tutorialItem.User.length }"
 											bg-color="linear-gradient(90deg, #7E72F2 0%, rgba(126, 114, 242, 0.623088) 100%)"
@@ -92,7 +99,7 @@
 				<BottomButton>
 					<template v-for="(tutorialItem, index) in tutorialItems">
 						<div
-							v-if="chatIndex === index"
+							v-if="chatStep === index"
 							:key="`tutorial-items-button-${index}`"
 							class="flex flex-row justify-content-between"
 						>
@@ -131,7 +138,7 @@ export default {
 	mixins: [routeMixin],
 	data: () => ({
 		tutorialItems: TutorialData.data,
-		chatIndex: 0,
+		chatStep: 0,
 	}),
 	computed: {
 		swiperOptions() {
@@ -162,14 +169,15 @@ export default {
 	created() {
 		this.setHeaderTitle('Tutorial');
 	},
+	mounted() {},
 	methods: {
 		...mapMutations(['setHeaderTitle']),
 		handleAnswer(tutorialIndex) {
-			this.chatIndex = tutorialIndex + 1;
-			// todo: scroll
+			this.chatStep = tutorialIndex + 1;
+			this.$_scrollToEnd('TutorialChallengeDetail');
 		},
 		showTaskTypeOption(index) {
-			return index + 1 === this.tutorialItems.length && this.chatIndex + 1 === this.tutorialItems.length;
+			return index + 1 === this.tutorialItems.length && this.chatStep + 1 === this.tutorialItems.length;
 		},
 	},
 	components: {
@@ -182,4 +190,18 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.z-chat-list-item {
+	//display: inline-block;
+	//margin-right: 10px;
+}
+.z-chat-list-enter-active,
+.z-chat-list-leave-active {
+	transition: all 1s;
+}
+.z-chat-list-enter,
+.z-chat-list-leave-to {
+	opacity: 0;
+	transform: translateY(30px);
+}
+</style>
