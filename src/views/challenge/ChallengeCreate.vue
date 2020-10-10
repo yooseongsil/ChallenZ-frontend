@@ -98,8 +98,8 @@ export default {
 		...mapMutations(['setHeaderTitle', 'setCreateChallengeInfo']),
 		setTutorialChallengeName(challengeName) {
 			const challengeNameList = {
-				Workout: '',
-				Hobby: '',
+				Workout: 'Running in a marathon.',
+				Study: 'Trying new recipes.',
 			};
 			this.challengeTitle = challengeNameList[challengeName];
 		},
