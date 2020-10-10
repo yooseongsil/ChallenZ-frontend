@@ -22,12 +22,19 @@
 					</div>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
-					<div class="center content-inputs">
+					<div class="center content-inputs mb-40">
 						<vs-input v-model="endAt" type="date" label="End at" />
 					</div>
 				</vs-col>
+				<vs-col v-if="disabled" vs-type="flex" vs-justify="center" vs-align="center" w="12">
+					<typography type="body2" color="#CC2727" element="p" align="center">
+						내용을 입력해 주세요
+					</typography>
+				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="6">
-					<BottomButton text="Next" :disabled="disabled" />
+					<BottomButton>
+						<vs-button block size="xl" @click="next"> next</vs-button>
+					</BottomButton>
 				</vs-col>
 			</vs-row>
 		</div>
@@ -44,13 +51,14 @@ export default {
 		allDay: false,
 		startAt: null,
 		endAt: null,
+		disabled: false,
 	}),
-	computed: {
-		disabled() {
+	methods: {
+		next() {
 			if (this.challengeTitle && this.startAt && this.endAt) {
-				return false;
+				this.disabled = false;
 			} else {
-				return true;
+				this.disabled = true;
 			}
 		},
 	},

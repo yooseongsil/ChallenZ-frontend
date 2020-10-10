@@ -1,22 +1,12 @@
 <template>
 	<div id="BottomButton">
-		<vs-button block size="xl" :disabled="disabled"> {{ text }}</vs-button>
+		<slot></slot>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'BottomButton',
-	props: {
-		text: {
-			type: String,
-			default: null,
-		},
-		disabled: {
-			type: Boolean,
-			default: true,
-		},
-	},
 };
 </script>
 
@@ -29,8 +19,5 @@ export default {
 	left: 0;
 	right: 0;
 	background: #fff;
-	.vs-button {
-		margin: 0;
-	}
 }
 </style>

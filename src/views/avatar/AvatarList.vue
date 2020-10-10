@@ -69,12 +69,11 @@ export default {
 
 <style scoped lang="scss">
 #AvatarList {
-	.vs-card {
+	/deep/ .vs-card {
 		max-width: 100% !important;
-		background: red !important;
-	}
-	.active {
-		border: 1px solid red !important;
+		&.active {
+			border: 1px solid red !important;
+		}
 	}
 	.vs-button {
 		margin: 0 !important;
