@@ -8,16 +8,19 @@
 				</vs-col>
 			</vs-row>
 		</div>
-		<Footer />
+		<!--		<Footer />-->
 	</div>
 </template>
 
 <script>
 import Header from '@/layouts/Header';
-import Footer from '@/layouts/Footer';
+// import Footer from '@/layouts/Footer';
 
 export default {
-	components: { Footer, Header },
+	components: {
+		Header,
+		// Footer,
+	},
 };
 </script>
 
