@@ -292,3 +292,18 @@
 .pr-40{
   padding-right: 40px !important;
 }
+.clearfix {
+  overflow: auto;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.float-left{
+  float: left !important;
+}
+.float-right{
+  float: right !important;
+}
