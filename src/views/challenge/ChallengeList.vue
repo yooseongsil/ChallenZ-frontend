@@ -9,7 +9,7 @@
 			<button type="button" class="btn btn_next" @click="clickNext"></button>
 		</header>
 		<div class="challengeList_body">
-			<vs-card v-for="list in challengeList" :key="list.title" type="3" class="mb-20" @click="goDetail(list._id)">
+			<vs-card v-for="list in challengeList" :key="list._id" type="3" class="mb-20" @click="goDetail(list._id)">
 				<template #title>
 					<h3>{{ list.title }}</h3>
 				</template>
@@ -28,7 +28,7 @@
 				</template>
 			</vs-card>
 			<router-link to="/challenge/create">
-				<div class="plus_btn">
+				<div class="plus_btn" :style="computedStyle">
 					<vs-button circle icon floating>
 						+
 					</vs-button>
@@ -53,27 +53,13 @@ export default {
 		targetMonth: null,
 		targetDay: null,
 		targetDayNumber: null,
-		challengeList: [
-			{
-				imgUrl: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt',
-				title: 'ABCDE1',
-				startAt: '',
-				endAt: '',
-			},
-			{
-				imgUrl: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt',
-				title: 'ABCDE2',
-				startAt: '',
-				endAt: '',
-			},
-			{
-				imgUrl: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt',
-				title: 'ABCDE3',
-				startAt: '',
-				endAt: '',
-			},
-		],
+		challengeList: null,
 	}),
+	computed: {
+		computedStyle() {
+			return this.challengeList ? null : { top: 0 };
+		},
+	},
 	created() {
 		this.targetDate = new Date().getUTCDate() + 1;
 		this.targetYear = new Date().getUTCFullYear();
