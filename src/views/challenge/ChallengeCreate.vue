@@ -18,14 +18,14 @@
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="center content-inputs mb-40">
-						<vs-input v-model="startDate" class="mb-12" type="date" label="Start at" />
-						<vs-input v-model="startTime" type="time" label="Start at" />
+						<vs-input v-model="startDate" class="mb-12" type="date" label="Starts at" />
+						<vs-input v-model="startTime" type="time" />
 					</div>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="center content-inputs">
-						<vs-input v-model="endDate" class="mb-12" type="date" label="End at" />
-						<vs-input v-model="endTime" type="time" label="End at" />
+						<vs-input v-model="endDate" class="mb-12" type="date" label="Ends at" />
+						<vs-input v-model="endTime" type="time" />
 					</div>
 				</vs-col>
 				<vs-col v-if="disabled" vs-type="flex" vs-justify="center" vs-align="center" w="12">
