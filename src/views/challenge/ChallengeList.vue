@@ -87,7 +87,7 @@ export default {
 	},
 	methods: {
 		goDetail(id) {
-			this.$_routeMixin_go_page(`/challenge/${id}`);
+			this.$_routeMixin_go_page(`/challenge/detail/${id}`);
 		},
 		checkDay() {
 			switch (this.targetDayNumber) {
