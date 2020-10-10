@@ -7,7 +7,11 @@ export default new Vuex.Store({
 	state: {
 		tutorialPassed: false,
 	},
-	getters: {},
+	getters: {
+		getTutorialPassed: state => {
+			return state.tutorialPassed;
+		},
+	},
 	mutations: {
 		setTutorialPassed: (state, payload) => {
 			return (state.tutorialPassed = payload);
