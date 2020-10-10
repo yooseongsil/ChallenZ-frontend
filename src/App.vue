@@ -17,6 +17,11 @@ import Header from '@/layouts/Header';
 import Footer from '@/layouts/Footer';
 
 export default {
+	mounted() {
+		if (localStorage.getItem('tutorialPassed')) {
+			this.$store.commit('setTutorialPassed', true);
+		}
+	},
 	components: { Footer, Header },
 };
 </script>
