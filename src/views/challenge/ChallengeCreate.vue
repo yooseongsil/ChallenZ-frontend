@@ -7,16 +7,19 @@
 						<vs-input v-model="challengeTitle" label="Challenge Name" placeholder="Trying new recipes." />
 					</div>
 				</vs-col>
-				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
-					<div class="clearfix  mb-20" style="padding-left: 10px">
+				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12" class="mb-20">
+					<div
+						class="mb-20 flex align-items-center  justify-content-between justify-content-center"
+						style="padding-left: 10px"
+					>
 						<typography element="p" class="float-left" type="caption" color="black"> All day</typography>
 
-						<div style="width: 50px" class="float-right">
+						<div style="width: 50px">
 							<vs-switch v-model="allDay" />
 						</div>
 					</div>
 				</vs-col>
-				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
+				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12" class="mb-20">
 					<div class="center content-inputs mb-40">
 						<vs-input v-model="startDate" class="mb-12" type="date" label="Starts at" />
 						<vs-input v-model="startTime" type="time" />
