@@ -25,7 +25,7 @@ export default {
 			default: null,
 			validator(value) {
 				// 값이 항상 아래 세 개의 값중 하나여야 합니다.
-				return ['title', 'subTitle', 'body1', 'body2', 'caption1'].indexOf(value) !== -1;
+				return ['title', 'subTitle', 'body1', 'body2', 'caption'].indexOf(value) !== -1;
 			},
 		},
 	},

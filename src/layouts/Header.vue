@@ -4,17 +4,21 @@
 			<vs-col vs-type="flex" vs-align="center" w="11" class="flex align-items-center justify-content-between">
 				<div class="flex align-items-center">
 					<div class="mr-16" @click="$_routeMixin_go_back">
-						<Icon :class="{ 'visibility-hidden': !$route.meta.detailPage }" name="IconRightArrow" />
+						<Icon :class="{ 'visibility-hidden': !isDetailPage }" name="IconRightArrow" />
 					</div>
 					<div>
-						<Typography type="body1">{{ getHeaderTitle }}</Typography>
+						<Typography type="title">{{ getHeaderTitle }}</Typography>
 					</div>
 				</div>
-
-				<!-- todo: badge badge-position="top-right" -->
-				<vs-avatar color="#FFFFFF" size="32">
-					<Icon name="IconMoreMenu" />
-				</vs-avatar>
+				<div class="flex align-items-center">
+					<!-- todo: badge badge-position="top-right" -->
+					<vs-avatar v-if="!isDetailPage" color="#FFFFFF" size="32">
+						<Icon name="IconMoreMenu" />
+					</vs-avatar>
+					<div v-if="challengeCreateStepTitle">
+						<Typography type="caption" color="#999999">{{ challengeCreateStepTitle }}</Typography>
+					</div>
+				</div>
 			</vs-col>
 		</vs-row>
 	</header>
@@ -31,6 +35,12 @@ export default {
 	mixins: [routeMixin],
 	computed: {
 		...mapGetters(['getHeaderTitle']),
+		isDetailPage() {
+			return this.$route.meta.detailPage;
+		},
+		challengeCreateStepTitle() {
+			return this.$route.meta.createStepTitle;
+		},
 	},
 	components: {
 		Typography,

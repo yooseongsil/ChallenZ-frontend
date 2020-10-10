@@ -4,9 +4,7 @@ import Home from '../views/Home.vue';
 import ChallengeCreate from '@/views/challenge/ChallengeCreate';
 import ChallengeList from '@/views/challenge/ChallengeList';
 import ChallengeDetail from '@/views/challenge/ChallengeDetail';
-import AvatarCreate from '@/views/avatar/AvatarCreate';
 import AvatarList from '@/views/avatar/AvatarList';
-import AvatarDetail from '@/views/avatar/AvatarDetail';
 
 Vue.use(VueRouter);
 
@@ -26,6 +24,7 @@ const routes = [
 		meta: {
 			title: '',
 			detailPage: true,
+			createStepTitle: 'Step 1 of 2',
 		},
 	},
 	{
@@ -47,30 +46,13 @@ const routes = [
 		},
 	},
 	{
-		path: '/avatar/create/:id?',
-		name: 'AvatarCreate',
-		component: AvatarCreate,
-		meta: {
-			title: '',
-			detailPage: true,
-		},
-	},
-	{
 		path: '/avatar/list',
 		name: 'AvatarList',
 		component: AvatarList,
 		meta: {
 			title: '',
 			detailPage: true,
-		},
-	},
-	{
-		path: '/avatar/detail/:id',
-		name: 'AvatarDetail',
-		component: AvatarDetail,
-		meta: {
-			title: '',
-			detailPage: true,
+			createStepTitle: 'Step 2 of 2',
 		},
 	},
 ];
