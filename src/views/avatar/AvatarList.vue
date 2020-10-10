@@ -10,23 +10,23 @@
 					vs-align="center"
 					w="6"
 				>
-					<vs-card :class="{ active: avatarActive[index] === true }" @click="clickAvatar(index)">
+					<vs-card :class="{ active: avatarActive[index] === true }" @click="clickAvatar(index, list._id)">
 						<template #title>
 							<h3>{{ list.name }}</h3>
 						</template>
 						<template #img>
-							<img :src="list.url" alt="list" />
+							<img :src="list.avatarUrl" alt="list" />
 						</template>
 						<template #text>
 							<p>
-								{{ list.desc }}
+								{{ list.description }}
 							</p>
 						</template>
 					</vs-card>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<BottomButton>
-						<vs-button block size="xl" @click="next"> next</vs-button>
+						<vs-button block size="xl" @click="createChallenge"> Finish</vs-button>
 					</BottomButton>
 				</vs-col>
 			</vs-row>
@@ -35,32 +35,52 @@
 </template>
 
 <script>
+import axios from 'axios';
+import routeMixin from '../../mixins/routeMixin';
+import { mapGetters, mapMutations } from 'vuex';
 import BottomButton from '../../components/BottomButton';
-import { mapMutations } from 'vuex';
 
 export default {
 	name: 'AvatarList',
+	mixins: [routeMixin],
 	data: () => ({
-		avatarList: [
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-			{ url: 'https://render-cdn.zepeto.io/20201010/06/39mqFOscZFNPoxxwDt', name: '강북멋쟁이', desc: '^0^' },
-		],
+		avatarList: null,
 		avatarActive: [],
 	}),
-	created() {
-		this.avatarActive = new Array(this.avatarList.length);
+	computed: {
+		...mapGetters(['getCreateChallengeInfo']),
+	},
+	async created() {
 		this.avatarActive.fill(false);
 		this.setHeaderTitle('Choose your Zavartar');
+		await this.getAvatarList();
+		this.avatarActive = new Array(this.avatarList.length);
 	},
 	methods: {
-		...mapMutations(['setHeaderTitle']),
-		clickAvatar(no) {
+		...mapMutations(['setHeaderTitle', 'setCreateChallengeInfo']),
+		clickAvatar(no, _id) {
 			this.avatarActive.fill(false);
 			this.avatarActive[no] = true;
+			this.setCreateChallengeInfo({ ...this.getCreateChallengeInfo, avatarId: _id });
+		},
+		createChallenge() {
+			const data = this.getCreateChallengeInfo;
+			axios
+				.post('/challenge', data)
+				.then(res => {
+					console.log(res);
+					this.$_routeMixin_go_page('/challenge/list');
+				})
+				.catch(err => console.log(err));
+		},
+		async getAvatarList() {
+			await axios
+				.get('/avatarList')
+				.then(res => {
+					console.log(res);
+					this.avatarList = res.data;
+				})
+				.catch(err => console.log(err));
 		},
 	},
 	components: { BottomButton },

@@ -7,6 +7,7 @@ export default new Vuex.Store({
 	state: {
 		tutorialPassed: false,
 		headerTitle: '',
+		createChallengeInfo: null,
 	},
 	getters: {
 		getTutorialPassed: state => {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
 		getHeaderTitle: state => {
 			return state.headerTitle;
 		},
+		getCreateChallengeInfo: state => {
+			return state.createChallengeInfo;
+		},
 	},
 	mutations: {
 		setTutorialPassed: (state, payload) => {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
 		},
 		setHeaderTitle: (state, payload) => {
 			return (state.headerTitle = payload);
+		},
+		setCreateChallengeInfo: (state, payload) => {
+			return (state.createChallengeInfo = payload);
 		},
 	},
 	actions: {},

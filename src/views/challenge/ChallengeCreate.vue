@@ -24,8 +24,8 @@
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="center content-inputs">
-						<vs-input v-model="endDate" class="mb-12" type="date" label="Ends at" />
-						<vs-input v-model="endTime" type="time" />
+						<vs-input v-model="endDate" :disabled="allDay" class="mb-12" type="date" label="Ends at" />
+						<vs-input v-model="endTime" :disabled="allDay" type="time" />
 					</div>
 				</vs-col>
 				<vs-col v-if="disabled" vs-type="flex" vs-justify="center" vs-align="center" w="12">
@@ -45,6 +45,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import routeMixin from '../../mixins/routeMixin';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -54,6 +55,7 @@ import BottomButton from '../../components/BottomButton';
 dayjs.extend(utc);
 export default {
 	name: 'ChallengeCreate',
+	mixins: [routeMixin],
 	data: () => ({
 		challengeTitle: null,
 		allDay: false,
@@ -64,11 +66,28 @@ export default {
 		disabled: false,
 	}),
 	computed: {
-		...mapGetters(['getTutorialPassed']),
+		...mapGetters(['getTutorialPassed', 'getCreateChallengeInfo']),
+	},
+	watch: {
+		allDay(newVal) {
+			if (newVal) {
+				this.endTime = this.startTime;
+				this.endDate = this.startDate;
+			}
+		},
+		startTime() {
+			if (this.allDay) {
+				this.endTime = this.startTime;
+			}
+		},
+		startDate() {
+			if (this.allDay) {
+				this.endDate = this.startDate;
+			}
+		},
 	},
 	created() {
 		this.setHeaderTitle('Create a challenge');
-
 		// tutorial challenge name
 		const tutorialChallengeName = this.$route.query.challenge_name;
 		if (tutorialChallengeName) {
@@ -76,7 +95,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['setHeaderTitle']),
+		...mapMutations(['setHeaderTitle', 'setCreateChallengeInfo']),
 		setTutorialChallengeName(challengeName) {
 			const challengeNameList = {
 				Workout: '',
@@ -88,8 +107,19 @@ export default {
 			return this.getTutorialPassed ? this.createChallenge() : this.next();
 		},
 		next() {
-			if (this.challengeTitle && this.startAt && this.startDate && this.endAt && this.endDate) {
+			if (this.challengeTitle && this.startTime && this.startDate && this.endTime && this.endDate) {
 				this.disabled = false;
+				this.setCreateChallengeInfo({
+					...this.getCreateChallengeInfo,
+					title: this.challengeTitle,
+					startAt: dayjs(this.startDate + this.startAt)
+						.utc()
+						.format(),
+					endAt: dayjs(this.endDate + this.endAt)
+						.utc()
+						.format(),
+				});
+				this.$_routeMixin_go_page('/avatar/list');
 			} else {
 				this.disabled = true;
 			}
