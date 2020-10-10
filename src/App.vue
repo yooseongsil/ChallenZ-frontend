@@ -17,10 +17,15 @@ import Header from '@/layouts/Header';
 // import Footer from '@/layouts/Footer';
 
 export default {
-	components: {
-		Header,
-		// Footer,
+	mounted() {
+		if (localStorage.getItem('tutorialPassed')) {
+			this.$store.commit('setTutorialPassed', true);
+		}
 	},
+	components: { 
+    Header,
+    // Footer,
+  },
 };
 </script>
 

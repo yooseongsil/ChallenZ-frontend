@@ -1,5 +1,5 @@
 <template>
-	<div id="BottomButton">
+	<div id="BottomButton" v-on="$listeners">
 		<slot></slot>
 	</div>
 </template>
@@ -19,5 +19,7 @@ export default {
 	left: 0;
 	right: 0;
 	background: #fff;
+	border-radius: 8px 8px 0 0;
+	border: 1px solid #dfe4ea;
 }
 </style>
