@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 import './utils';
 import './plugins';
-import './assets/index.scss';
+import './assets/styles/base/index.scss';
 
 import instance from './utils/axios';
 Vue.prototype.$axios = instance;

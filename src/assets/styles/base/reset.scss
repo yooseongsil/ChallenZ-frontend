@@ -20,6 +20,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
+  //font-family: $web-font-family;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -29,13 +30,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-
 }
 ol, ul {
   list-style: none;
-}
-button{
-  outline: 0;
 }
 blockquote, q {
   quotes: none;
@@ -59,5 +56,4 @@ table {
 a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
-  outline: 0;
 }
