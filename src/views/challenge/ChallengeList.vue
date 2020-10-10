@@ -147,8 +147,8 @@ export default {
 	}
 	.btn {
 		border: 0;
-		border-top: 2px solid black !important;
-		border-right: 2px solid black !important;
+		border-top: 2px solid #606060 !important;
+		border-right: 2px solid #606060 !important;
 		background: transparent;
 		color: transparent;
 		padding: 0;
