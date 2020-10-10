@@ -1,7 +1,16 @@
 <template>
 	<header class="center grid">
 		<vs-row align="center" justify="center" class="header_container">
-			<vs-col vs-type="flex" vs-align="center" w="11" class="flex justify-content-flex-end">
+			<vs-col vs-type="flex" vs-align="center" w="11" class="flex align-items-center justify-content-between">
+				<div class="flex align-items-center">
+					<div class="mr-16" @click="$_routeMixin_go_back">
+						<Icon :class="{ 'visibility-hidden': !$route.meta.detailPage }" name="IconRightArrow" />
+					</div>
+					<div>
+						<Typography type="body1">{{ getHeaderTitle }}</Typography>
+					</div>
+				</div>
+
 				<!-- todo: badge badge-position="top-right" -->
 				<vs-avatar color="#FFFFFF" size="32">
 					<Icon name="IconMoreMenu" />
@@ -13,10 +22,18 @@
 
 <script>
 import Icon from '@/components/Icon';
+import routeMixin from '@/mixins/routeMixin';
+import Typography from '@/components/Typography';
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'Header',
+	mixins: [routeMixin],
+	computed: {
+		...mapGetters(['getHeaderTitle']),
+	},
 	components: {
+		Typography,
 		Icon,
 	},
 };
@@ -49,5 +66,8 @@ header {
 			padding: 0;
 		}
 	}
+}
+.visibility-hidden {
+	visibility: hidden;
 }
 </style>

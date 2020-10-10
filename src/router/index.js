@@ -15,36 +15,63 @@ const routes = [
 		path: '/',
 		name: 'Home',
 		component: Home,
+		meta: {
+			title: '',
+		},
 	},
 	{
 		path: '/challenge/create/:id?',
 		name: 'ChallengeCreate',
 		component: ChallengeCreate,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 	{
 		path: '/challenge/list',
 		name: 'ChallengeList',
 		component: ChallengeList,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 	{
 		path: '/challenge/detail/:id',
 		name: 'ChallengeDetail',
 		component: ChallengeDetail,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 	{
 		path: '/avatar/create/:id?',
 		name: 'AvatarCreate',
 		component: AvatarCreate,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 	{
 		path: '/avatar/list',
 		name: 'AvatarList',
 		component: AvatarList,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 	{
 		path: '/avatar/detail/:id',
 		name: 'AvatarDetail',
 		component: AvatarDetail,
+		meta: {
+			title: '',
+			detailPage: true,
+		},
 	},
 ];
 

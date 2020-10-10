@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -66,7 +66,11 @@ export default {
 	computed: {
 		...mapGetters(['getTutorialPassed']),
 	},
+	created() {
+		this.setHeaderTitle('Create a challenge');
+	},
 	methods: {
+		...mapMutations(['setHeaderTitle']),
 		handleButtonClick() {
 			return this.getTutorialPassed ? this.createChallenge() : this.next();
 		},
