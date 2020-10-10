@@ -1,12 +1,14 @@
 <template>
-	<div id="app" class="center grid">
-		<vs-row>
-			<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
-				<Header />
-				<router-view />
-				<Footer />
-			</vs-col>
-		</vs-row>
+	<div id="app">
+		<Header />
+		<div class="main_grid_component center grid">
+			<vs-row>
+				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
+					<router-view />
+				</vs-col>
+			</vs-row>
+		</div>
+		<Footer />
 	</div>
 </template>
 
@@ -19,4 +21,15 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.main_grid_component {
+	padding-top: 80px !important;
+	overflow-x: hidden;
+	-ms-overflow-x: hidden;
+	height: 100%;
+
+	@include pc {
+		padding-top: 80px !important;
+	}
+}
+</style>
