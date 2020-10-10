@@ -24,6 +24,7 @@ const routes = [
 		meta: {
 			title: '',
 			detailPage: true,
+			createStepTitle: 'Step 1 of 2',
 		},
 	},
 	{
@@ -51,6 +52,7 @@ const routes = [
 		meta: {
 			title: '',
 			detailPage: true,
+			createStepTitle: 'Step 2 of 2',
 		},
 	},
 ];

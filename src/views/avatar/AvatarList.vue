@@ -36,6 +36,8 @@
 
 <script>
 import BottomButton from '../../components/BottomButton';
+import { mapMutations } from 'vuex';
+
 export default {
 	name: 'AvatarList',
 	data: () => ({
@@ -52,8 +54,10 @@ export default {
 	created() {
 		this.avatarActive = new Array(this.avatarList.length);
 		this.avatarActive.fill(false);
+		this.setHeaderTitle('Choose your Zavartar');
 	},
 	methods: {
+		...mapMutations(['setHeaderTitle']),
 		clickAvatar(no) {
 			this.avatarActive.fill(false);
 			this.avatarActive[no] = true;
