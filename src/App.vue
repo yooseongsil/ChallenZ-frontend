@@ -22,10 +22,10 @@ export default {
 			this.$store.commit('setTutorialPassed', true);
 		}
 	},
-	components: { 
-    Header,
-    // Footer,
-  },
+	components: {
+		Header,
+		// Footer,
+	},
 };
 </script>
 

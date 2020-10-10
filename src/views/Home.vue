@@ -122,6 +122,7 @@ import BottomButton from '@/components/BottomButton';
 import Icon from '@/components/Icon';
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import routeMixin from '@/mixins/routeMixin';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'Home',
@@ -156,8 +157,11 @@ export default {
 			];
 		},
 	},
-	created() {},
+	created() {
+		this.setHeaderTitle('Tutorial');
+	},
 	methods: {
+		...mapMutations(['setHeaderTitle']),
 		handleAnswer(tutorialIndex) {
 			this.chatIndex = tutorialIndex + 1;
 			// todo: scroll
