@@ -29,7 +29,7 @@ export default {
 	padding-top: 80px !important;
 	overflow-x: hidden;
 	-ms-overflow-x: hidden;
-	height: 100%;
+	height: 100vh;
 
 	@include pc {
 		padding-top: 80px !important;
