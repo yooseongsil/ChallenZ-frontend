@@ -12,7 +12,7 @@
 				</div>
 				<div class="flex align-items-center">
 					<!-- todo: badge badge-position="top-right" -->
-					<vs-avatar v-if="isHomePage" color="#FFFFFF" size="32">
+					<vs-avatar v-if="isHomePage && getTutorialPassed" color="#FFFFFF" size="32">
 						<Icon name="IconMoreMenu" />
 					</vs-avatar>
 					<div v-if="challengeCreateStepTitle">
@@ -34,7 +34,7 @@ export default {
 	name: 'Header',
 	mixins: [routeMixin],
 	computed: {
-		...mapGetters(['getHeaderTitle']),
+		...mapGetters(['getHeaderTitle', 'getTutorialPassed']),
 		isDetailPage() {
 			return this.$route.meta.detailPage;
 		},
