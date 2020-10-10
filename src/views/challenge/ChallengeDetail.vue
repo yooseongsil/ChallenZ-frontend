@@ -2,54 +2,76 @@
 	<div id="ChallengeDetail">
 		<vs-col vs-type="flex" vs-align="center" w="11">
 			<vs-row>
-				<template v-for="(list, index) in messageList">
-					<template v-if="list.avatarUrl !== null">
-						<vs-col :key="`col-${index}`" class="flex flex-row">
-							<vs-avatar size="40" circle style="min-width: 40px" class="mr-12">
-								<img :src="list.avatarUrl" alt="" />
-							</vs-avatar>
-							<vs-card>
-								<template #text>
-									<p>
-										{{ list.contents }}
-									</p>
-								</template>
-							</vs-card>
-						</vs-col>
-					</template>
-					<template v-else>
-						<vs-col :key="`col-${index}`" class="flex flex-row">
-							<vs-avatar size="40" circle style="min-width: 40px" class="mr-12">
-								<img src="https://vuesax.com/avatars/avatar-4.png" alt="" />
-							</vs-avatar>
-							<vs-card>
-								<template #text>
-									<p>
-										{{ list.contents }}
-									</p>
-								</template>
-							</vs-card>
-						</vs-col>
-					</template>
+				<template v-for="(msg, index) in botAnswerList">
+					<vs-col :key="`col-${index}`" class="flex flex-row">
+						<template>
+							<vs-row v-if="msg.avatarUrl === null" class="flex justify-content-flex-end">
+								<ChatBalloon
+									class="mb-12"
+									bg-color="linear-gradient(90deg, #7E72F2 0%, rgba(126, 114, 242, 0.623088) 100%)"
+									color="white"
+								>
+									<template v-slot:title>
+										<span v-html="msg.contents" />
+									</template>
+								</ChatBalloon>
+							</vs-row>
+							<template v-else>
+								<vs-avatar
+									:key="`avatar-${index}`"
+									size="40"
+									circle
+									style="min-width: 40px"
+									class="mr-12"
+								>
+									<img :src="msg.avatarUrl" alt="" />
+								</vs-avatar>
+								<ChatBalloon class="mb-12" bg-color="white" color="deepDark">
+									<template v-slot:title>
+										<span v-html="msg.contents" />
+									</template>
+								</ChatBalloon>
+							</template>
+						</template>
+					</vs-col>
 				</template>
 			</vs-row>
-			<template v-for="(trigger, index) in triggerList">
-				<vs-button :key="`trigger-${index}`" flat @click="createMessage(trigger)">
-					{{ trigger }}
-				</vs-button>
-			</template>
+			<vs-row>
+				<vs-col w="12">
+					<BottomButton>
+						<template v-for="(trigger, index) in triggerList">
+							<div
+								:key="`trigger-${index}`"
+								class="flex flex-row justify-content-between mt-8"
+								@click="chooseTrigger(trigger)"
+							>
+								<vs-button primary block size="xl" style="margin: 0" border>
+									{{ trigger }}
+								</vs-button>
+							</div>
+						</template>
+					</BottomButton>
+				</vs-col>
+			</vs-row>
 		</vs-col>
+		<div v-if="!shareBtn" class="shareBtn">
+			<Icon name="IconSend" />
+		</div>
 	</div>
 </template>
 
 <script>
 import axios from 'axios';
+import ChatBalloon from '@/components/ChatBalloon';
+import BottomButton from '@/components/BottomButton';
 export default {
 	name: 'ChallengeDetail',
 	data: () => ({
 		messageList: null,
 		triggerList: null,
 		chatStep: 0,
+		botAnswerList: [],
+		shareBtn: false,
 	}),
 	mounted() {
 		this.getChallengeDetail();
@@ -70,8 +92,11 @@ export default {
 				.catch(err => console.log(err));
 		},
 		getChallengeDetail() {
+			const id = '5f81f6fb31c0f39d9f836c37';
+			/*${this.$route.params.id}*/
 			axios
-				.get(`challenge/${this.$route.params.id}`)
+				.get(`challenge/${id}`)
+
 				.then(res => {
 					console.log(res);
 					this.messageList = res.data.messageList;
@@ -79,18 +104,62 @@ export default {
 				.catch(err => console.log(err));
 		},
 		getTriggerList() {
+			const id = '5f81f6fb31c0f39d9f836c37';
+			/*${this.$route.params.id}*/
 			axios
-				.get(`triggerList/${this.$route.params.id}`)
+				.get(`triggerList/${id}`)
 				.then(res => {
 					console.log(res);
 					this.triggerList = res.data;
 				})
 				.catch(err => console.log(err));
 		},
+		chooseTrigger(text) {
+			// this.shareBtn = true;
+			switch (text) {
+				case 'I am not in the mood':
+					console.log(this.messageList[1]);
+					this.botAnswerList.push(this.messageList[0]);
+					setTimeout(() => {
+						this.botAnswerList.push(this.messageList[1]);
+					}, 400);
+					break;
+				case "I'm done with this challenge!":
+					this.botAnswerList.push(this.messageList[2]);
+					setTimeout(() => {
+						this.botAnswerList.push(this.messageList[3]);
+					}, 300);
+					break;
+				case 'Need some encouragement':
+					this.botAnswerList.push(this.messageList[4]);
+					setTimeout(() => {
+						this.botAnswerList.push(this.messageList[9]);
+					}, 200);
+					break;
+			}
+		},
+	},
+	components: {
+		BottomButton,
+		ChatBalloon,
 	},
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+#ChallengeDetail {
+	padding-bottom: 150px;
+	position: relative;
+	.shareBtn {
+		position: absolute;
+		bottom: 110px;
+		right: 20px;
+		width: 40px;
+		height: 40px;
+		border-radius: 4px;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.227437);
+	}
+}
+</style>
 
 <!--this.messageList = res.data.messageList; -->
