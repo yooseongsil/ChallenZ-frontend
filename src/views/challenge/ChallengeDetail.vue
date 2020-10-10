@@ -6,12 +6,38 @@
 					<template v-if="list.avatarUrl !== null">
 						<vs-col :key="`col-${index}`" class="flex flex-row">
 							<vs-avatar size="40" circle style="min-width: 40px" class="mr-12">
+								<img :src="list.avatarUrl" alt="" />
+							</vs-avatar>
+							<vs-card>
+								<template #text>
+									<p>
+										{{ list.contents }}
+									</p>
+								</template>
+							</vs-card>
+						</vs-col>
+					</template>
+					<template v-else>
+						<vs-col :key="`col-${index}`" class="flex flex-row">
+							<vs-avatar size="40" circle style="min-width: 40px" class="mr-12">
 								<img src="https://vuesax.com/avatars/avatar-4.png" alt="" />
 							</vs-avatar>
+							<vs-card>
+								<template #text>
+									<p>
+										{{ list.contents }}
+									</p>
+								</template>
+							</vs-card>
 						</vs-col>
 					</template>
 				</template>
 			</vs-row>
+			<template v-for="(trigger, index) in triggerList">
+				<vs-button :key="`trigger-${index}`" flat @click="createMessage(trigger)">
+					{{ trigger }}
+				</vs-button>
+			</template>
 		</vs-col>
 	</div>
 </template>
@@ -22,6 +48,7 @@ export default {
 	name: 'ChallengeDetail',
 	data: () => ({
 		messageList: null,
+		triggerList: null,
 		chatStep: 0,
 	}),
 	mounted() {
@@ -29,18 +56,35 @@ export default {
 		this.getTriggerList();
 	},
 	methods: {
-		getChallengeDetail() {
-			const id = '5f81f6fb31c0f39d9f836c37';
+		createMessage(trigger) {
+			const data = {
+				challengeId: this.$route.params.id,
+				trigger: trigger,
+			};
 			axios
-				.get(`challenge/${id}`)
-				.then(res => console.log(res))
+				.post('/message', data)
+				.then(res => {
+					console.log(res);
+					this.getChallengeDetail();
+				})
+				.catch(err => console.log(err));
+		},
+		getChallengeDetail() {
+			axios
+				.get(`challenge/${this.$route.params.id}`)
+				.then(res => {
+					console.log(res);
+					this.messageList = res.data.messageList;
+				})
 				.catch(err => console.log(err));
 		},
 		getTriggerList() {
-			const id = '5f81f6fb31c0f39d9f836c37';
 			axios
-				.get(`triggerList/${id}`)
-				.then(res => console.log(res))
+				.get(`triggerList/${this.$route.params.id}`)
+				.then(res => {
+					console.log(res);
+					this.triggerList = res.data;
+				})
 				.catch(err => console.log(err));
 		},
 	},
