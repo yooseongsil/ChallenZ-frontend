@@ -1,4 +1,4 @@
-# challenZ-front
+# ChallenZ-frontend
 
 ## Project setup
 ```
