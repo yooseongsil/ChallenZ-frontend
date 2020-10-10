@@ -80,7 +80,4 @@ header {
 		}
 	}
 }
-.visibility-hidden {
-	visibility: hidden;
-}
 </style>

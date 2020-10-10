@@ -6,8 +6,8 @@
 					<template v-for="(item, index) in chatList">
 						<vs-col :key="`col-${index}`" class="flex flex-row">
 							<vs-avatar
-								v-if="item.Z"
 								:key="`avatar-${index}`"
+								:class="{ 'visibility-hidden': !showAvatar(index) }"
 								size="40"
 								circle
 								style="min-width: 40px"
@@ -168,6 +168,10 @@ export default {
 	},
 	methods: {
 		...mapMutations(['setHeaderTitle']),
+		showAvatar(index) {
+			const isAvatarIndex = [0, 3, 6, 9, 11, 13].includes(index);
+			return isAvatarIndex;
+		},
 		async handleInitChatList() {
 			const zList = this.tutorialItems[0].Z;
 			await this.handleLoop(zList, 'Z');
