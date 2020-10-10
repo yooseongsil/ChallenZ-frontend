@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './utils';
+import './plugins';
 
 import instance from './utils/axios';
 Vue.prototype.$axios = instance;
