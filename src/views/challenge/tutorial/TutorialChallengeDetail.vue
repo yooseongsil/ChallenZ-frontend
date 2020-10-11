@@ -21,6 +21,7 @@
 									v-for="(zItem, zIndex) in item"
 									:key="`z-chat-balloon-${zIndex}`"
 									class="z-chat-list-item"
+									:style="index === 14 ? 'width: calc(100% - 52px)' : ''"
 								>
 									<ChatBalloon v-if="item.Z" class="mb-12" bg-color="white" color="deepDark">
 										<template v-slot:title>
@@ -237,19 +238,5 @@ export default {
 			}
 		}
 	}
-}
-
-.z-chat-list-item {
-	//display: inline-block;
-	//margin-right: 10px;
-}
-.z-chat-list-enter-active,
-.z-chat-list-leave-active {
-	transition: all 1s;
-}
-.z-chat-list-enter,
-.z-chat-list-leave-to {
-	opacity: 0;
-	transform: translateY(30px);
 }
 </style>
