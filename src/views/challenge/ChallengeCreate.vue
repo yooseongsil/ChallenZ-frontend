@@ -21,13 +21,20 @@
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12" class="mb-20">
 					<div class="center content-inputs mb-40">
-						<vs-input v-model="startDate" class="mb-12" type="date" label="Starts at" />
+						<vs-input v-model="startDate" class="mb-12" type="date" label="Starts at" :max="endDate" />
 						<vs-input v-model="startTime" type="time" />
 					</div>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
 					<div class="center content-inputs">
-						<vs-input v-model="endDate" :disabled="allDay" class="mb-12" type="date" label="Ends at" />
+						<vs-input
+							v-model="endDate"
+							:disabled="allDay"
+							class="mb-12"
+							type="date"
+							label="Ends at"
+							:min="startDate"
+						/>
 						<vs-input v-model="endTime" :disabled="allDay" type="time" />
 					</div>
 				</vs-col>
