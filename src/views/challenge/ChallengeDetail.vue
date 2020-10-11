@@ -85,7 +85,10 @@ export default {
 			const data = {
 				challengeId: _id,
 			};
-			axios.post('/challenge/read', data).then(res => console.log(res).catch(err => console.log(err)));
+			axios
+				.post('/challenge/read', data)
+				.then(res => console.log(res))
+				.catch(err => console.log(err));
 		},
 		createMessage(trigger) {
 			const data = {
@@ -105,7 +108,6 @@ export default {
 			/*${this.$route.params.id}*/
 			axios
 				.get(`challenge/${this.$route.params.id}`)
-
 				.then(res => {
 					// console.log(res);
 					this.messageList = res.data.messageList;
