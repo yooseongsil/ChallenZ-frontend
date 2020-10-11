@@ -17,9 +17,16 @@
 					<img :src="list.avatar.avatarUrl" alt="" />
 				</template>
 				<template #text>
-					<p>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-					</p>
+					<div class="challengeList_body_text">
+						<p style="color: #999">
+							<strong style="display: block">Starts at</strong>
+							{{ list.startAt }}
+						</p>
+						<p style="color: #999">
+							<strong style="display: block">Ends at</strong>
+							{{ list.endAt }}
+						</p>
+					</div>
 				</template>
 				<template #interactions>
 					<div class="IconTrash">
@@ -145,6 +152,13 @@ export default {
 			line-height: 62px;
 		}
 	}
+	.challengeList_body {
+		&_text {
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
 	.btn {
 		border: 0;
 		border-top: 2px solid #606060 !important;
@@ -186,6 +200,9 @@ export default {
 		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
 		background: #fff;
 		padding: 8px 10px;
+	}
+	/deep/ .vs-card__img {
+		background: #f2f2f2;
 	}
 }
 </style>
