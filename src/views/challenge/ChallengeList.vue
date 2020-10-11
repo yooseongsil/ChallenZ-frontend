@@ -15,7 +15,7 @@
 				type="3"
 				class="card_container mb-20"
 				:class="avatarRandomBgColor(list.avatar.name)"
-				@click="goDetail(list._id)"
+				@click="goDetail(list._id, list.title)"
 			>
 				<template #title>
 					<h3>{{ list.title }}</h3>
@@ -61,6 +61,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import Icon from '@/components/Icon';
 import Typography from '@/components/Typography';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'ChallengeList',
@@ -90,12 +91,14 @@ export default {
 		this.checkDay();
 	},
 	methods: {
+		...mapMutations(['setHeaderTitle']),
 		avatarRandomBgColor(name) {
 			const index = name.length % 5;
 			return `bg-${index}`;
 		},
-		goDetail(id) {
+		goDetail(id, title) {
 			this.$_routeMixin_go_page(`/challenge/detail/${id}`);
+			this.setHeaderTitle(title);
 		},
 		checkDay() {
 			switch (this.targetDayNumber) {
