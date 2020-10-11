@@ -22,9 +22,9 @@
 					</p>
 				</template>
 				<template #interactions>
-					<vs-button danger icon>
+					<div class="IconTrash">
 						<Icon name="IconTrash" />
-					</vs-button>
+					</div>
 				</template>
 			</vs-card>
 			<router-link to="/challenge/create">
@@ -178,6 +178,14 @@ export default {
 			line-height: 56px;
 			font-size: 28px;
 		}
+	}
+	.IconTrash {
+		width: 34px;
+		height: 34px;
+		border-radius: 8px;
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+		background: #fff;
+		padding: 8px 10px;
 	}
 }
 </style>

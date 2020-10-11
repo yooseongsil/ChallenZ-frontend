@@ -54,7 +54,7 @@
 				</vs-col>
 			</vs-row>
 		</vs-col>
-		<div v-if="!shareBtn" class="shareBtn">
+		<div v-if="shareBtn" class="shareBtn">
 			<Icon name="IconSend" />
 		</div>
 	</div>
@@ -64,6 +64,8 @@
 import axios from 'axios';
 import ChatBalloon from '@/components/ChatBalloon';
 import BottomButton from '@/components/BottomButton';
+import Icon from '@/components/Icon';
+
 export default {
 	name: 'ChallengeDetail',
 	data: () => ({
@@ -92,33 +94,31 @@ export default {
 				.catch(err => console.log(err));
 		},
 		getChallengeDetail() {
-			const id = '5f81f6fb31c0f39d9f836c37';
+			// const id = '5f81f6fb31c0f39d9f836c37';
 			/*${this.$route.params.id}*/
 			axios
-				.get(`challenge/${id}`)
+				.get(`challenge/${this.$route.params.id}`)
 
 				.then(res => {
-					console.log(res);
+					// console.log(res);
 					this.messageList = res.data.messageList;
 				})
 				.catch(err => console.log(err));
 		},
 		getTriggerList() {
-			const id = '5f81f6fb31c0f39d9f836c37';
-			/*${this.$route.params.id}*/
+			// const id = '5f81f6fb31c0f39d9f836c37';
 			axios
-				.get(`triggerList/${id}`)
+				.get(`triggerList/${this.$route.params.id}`)
 				.then(res => {
-					console.log(res);
+					// console.log(res);
 					this.triggerList = res.data;
 				})
 				.catch(err => console.log(err));
 		},
 		chooseTrigger(text) {
-			// this.shareBtn = true;
+			this.shareBtn = true;
 			switch (text) {
 				case 'I am not in the mood':
-					console.log(this.messageList[1]);
 					this.botAnswerList.push(this.messageList[0]);
 					setTimeout(() => {
 						this.botAnswerList.push(this.messageList[1]);
@@ -140,6 +140,7 @@ export default {
 		},
 	},
 	components: {
+		Icon,
 		BottomButton,
 		ChatBalloon,
 	},
@@ -158,6 +159,7 @@ export default {
 		height: 40px;
 		border-radius: 4px;
 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.227437);
+		padding: 12px 10px;
 	}
 }
 </style>
