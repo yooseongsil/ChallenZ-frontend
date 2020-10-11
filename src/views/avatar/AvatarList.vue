@@ -11,7 +11,8 @@
 					w="6"
 				>
 					<vs-card
-						:class="({ active: index === activeAvatarIndex }, avatarRandomBgColor())"
+						class="card_container"
+						:class="[{ active: index === activeAvatarIndex }, avatarRandomBgColor()]"
 						@click="clickAvatar(index, list._id)"
 					>
 						<template #title>
@@ -85,8 +86,9 @@ export default {
 			await axios
 				.get('/avatarList')
 				.then(res => {
-					console.log(res);
-					this.avatarList = res.data;
+					// console.log(res);
+					const legacyAvatarList = ['강북멋쟁이', 'V'];
+					this.avatarList = [...res.data].filter(data => !legacyAvatarList.includes(data.name));
 				})
 				.catch(err => console.log(err));
 		},
@@ -98,6 +100,21 @@ export default {
 <style scoped lang="scss">
 #AvatarList {
 	padding: 0 20px 50px 20px;
+
+	.card_container {
+		/deep/ .vs-card {
+			&__img {
+				height: 156px;
+				border-radius: 16px;
+
+				img {
+					transform: translateY(54px);
+					width: 200%;
+				}
+			}
+		}
+	}
+
 	.vs-card-content {
 		margin: 8px;
 		&.active {
