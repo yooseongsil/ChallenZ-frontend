@@ -18,13 +18,13 @@
 				</template>
 				<template #text>
 					<div class="challengeList_body_text">
-						<p style="color: #999">
+						<p style="color: #999; margin-bottom: 8px;">
 							<strong style="display: block">Starts at</strong>
-							{{ list.startAt }}
+							{{ list.startAt | parseDate }}
 						</p>
 						<p style="color: #999">
 							<strong style="display: block">Ends at</strong>
-							{{ list.endAt }}
+							{{ list.endAt | parseDate }}
 						</p>
 					</div>
 				</template>
@@ -48,6 +48,7 @@
 <script>
 import routeMixin from '../../mixins/routeMixin';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import Icon from '@/components/Icon';
 import Typography from '@/components/Typography';
 
@@ -133,11 +134,25 @@ export default {
 				.catch(err => console.log(err));
 		},
 	},
+	filters: {
+		parseDate(value) {
+			return dayjs(value).format('YY.MM.DD A h:mm ');
+		},
+	},
 	components: { Icon, Typography },
 };
 </script>
 
 <style scoped lang="scss">
+/deep/ .vs-card {
+	margin: 0 auto !important;
+}
+/deep/ .vs-card__img {
+	width: 55%;
+}
+/deep/ .vs-card__text {
+	padding-top: 25px !important;
+}
 #ChallengeList {
 	padding: 0 20px;
 	.challengeList_header {
@@ -156,7 +171,9 @@ export default {
 		&_text {
 			position: relative;
 			top: 50%;
-			transform: translateY(-50%);
+			transform: translateY(-30%);
+			font-size: 11px;
+			line-height: 13px;
 		}
 	}
 	.btn {
