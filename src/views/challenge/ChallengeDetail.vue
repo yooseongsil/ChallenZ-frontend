@@ -1,8 +1,8 @@
 <template>
 	<div id="ChallengeDetail">
-		<vs-col vs-type="flex" vs-align="center" w="11">
+		<vs-col vs-type="flex" vs-align="center" w="11" style="overflow: auto; margin: 0 auto; padding-bottom: 60px;">
 			<vs-row>
-				<template v-for="(msg, index) in botAnswerList">
+				<template v-for="(msg, index) in messageList">
 					<vs-col :key="`col-${index}`" class="flex flex-row">
 						<template>
 							<vs-row v-if="msg.avatarUrl === null" class="flex justify-content-flex-end">
@@ -43,9 +43,16 @@
 							<div
 								:key="`trigger-${index}`"
 								class="flex flex-row justify-content-between mt-8"
-								@click="chooseTrigger(trigger)"
+								@click="createMessage(trigger, index)"
 							>
-								<vs-button primary block size="xl" style="margin: 0" border>
+								<vs-button
+									primary
+									block
+									size="xl"
+									style="margin: 0"
+									:border="index !== 1"
+									:loading="triggeredIndex === index"
+								>
 									{{ trigger }}
 								</vs-button>
 							</div>
@@ -71,14 +78,17 @@ export default {
 	data: () => ({
 		messageList: null,
 		triggerList: null,
+		triggeredIndex: -1,
 		chatStep: 0,
 		botAnswerList: [],
 		shareBtn: false,
+		challengeId: null,
 	}),
 	mounted() {
-		this.getChallengeDetail();
+		this.getChallengeDetail(true);
 		this.getTriggerList();
 		this.readMessage(this.$route.params.id);
+		this.challengeId = this.$route.params.id;
 	},
 	methods: {
 		readMessage(_id) {
@@ -90,62 +100,48 @@ export default {
 				.then(res => console.log(res))
 				.catch(err => console.log(err));
 		},
-		createMessage(trigger) {
+		async createMessage(trigger, index) {
+			// 로딩 대신
+			this.triggeredIndex = index;
 			const data = {
 				challengeId: this.$route.params.id,
 				trigger: trigger,
 			};
-			axios
+			await axios
 				.post('/message', data)
-				.then(res => {
-					console.log(res);
+				.then(() => {
 					this.getChallengeDetail();
 				})
 				.catch(err => console.log(err));
+			this.triggeredIndex = -1;
 		},
-		getChallengeDetail() {
-			// const id = '5f81f6fb31c0f39d9f836c37';
-			/*${this.$route.params.id}*/
+		getChallengeDetail(flag) {
 			axios
 				.get(`challenge/${this.$route.params.id}`)
-				.then(res => {
-					// console.log(res);
-					this.messageList = res.data.messageList;
+				.then(({ data }) => {
+					// 그냥 로딩일 때
+					if (flag) {
+						this.messageList = data.messageList;
+					} else {
+						const lastMessage = data.messageList.slice(-1)[0];
+						const restMessage = data.messageList.slice(0, data.messageList.length - 1);
+						console.log(lastMessage);
+						console.log(restMessage);
+						this.messageList = restMessage;
+						setTimeout(() => {
+							this.messageList.push(lastMessage);
+						}, 1000);
+					}
 				})
 				.catch(err => console.log(err));
 		},
 		getTriggerList() {
-			// const id = '5f81f6fb31c0f39d9f836c37';
 			axios
 				.get(`triggerList/${this.$route.params.id}`)
 				.then(res => {
-					// console.log(res);
 					this.triggerList = res.data;
 				})
 				.catch(err => console.log(err));
-		},
-		chooseTrigger(text) {
-			this.shareBtn = true;
-			switch (text) {
-				case 'I am not in the mood':
-					this.botAnswerList.push(this.messageList[0]);
-					setTimeout(() => {
-						this.botAnswerList.push(this.messageList[1]);
-					}, 400);
-					break;
-				case "I'm done with this challenge!":
-					this.botAnswerList.push(this.messageList[2]);
-					setTimeout(() => {
-						this.botAnswerList.push(this.messageList[3]);
-					}, 300);
-					break;
-				case 'Need some encouragement':
-					this.botAnswerList.push(this.messageList[4]);
-					setTimeout(() => {
-						this.botAnswerList.push(this.messageList[9]);
-					}, 200);
-					break;
-			}
 		},
 	},
 	components: {
