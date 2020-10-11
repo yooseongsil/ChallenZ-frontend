@@ -106,10 +106,10 @@ export default {
 					this.targetDay = 'Mon';
 					break;
 				case 2:
-					this.targetDay = 'Thu';
+					this.targetDay = 'Tue';
 					break;
 				case 3:
-					this.targetDay = 'Wen';
+					this.targetDay = 'Wed';
 					break;
 				case 4:
 					this.targetDay = 'Thu';
@@ -177,7 +177,7 @@ export default {
 			img {
 				transform: translateY(60px);
 				width: 200%;
-				min-width: auto;
+				min-width: auto !important;
 			}
 		}
 	}
@@ -221,6 +221,8 @@ export default {
 }
 #ChallengeList {
 	padding: 0 20px;
+	height: 100%;
+
 	.challengeList_header {
 		position: fixed;
 		top: 0;
@@ -264,7 +266,7 @@ export default {
 		}
 	}
 	.plus_btn {
-		position: absolute;
+		position: fixed;
 		bottom: 5px;
 		right: 16px;
 		.vs-button {
