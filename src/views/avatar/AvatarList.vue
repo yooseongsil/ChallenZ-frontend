@@ -12,7 +12,7 @@
 				>
 					<vs-card
 						class="card_container"
-						:class="[{ active: index === activeAvatarIndex }, avatarRandomBgColor()]"
+						:class="[{ active: index === activeAvatarIndex }, avatarRandomBgColor(list.name)]"
 						@click="clickAvatar(index, list._id)"
 					>
 						<template #title>
@@ -69,8 +69,9 @@ export default {
 			// this.avatarActive[no] = true;
 			this.setCreateChallengeInfo({ ...this.getCreateChallengeInfo, avatarId: _id });
 		},
-		avatarRandomBgColor() {
-			return `bg-${_.random(0, 4)}`;
+		avatarRandomBgColor(name) {
+			const index = name.length % 5;
+			return `bg-${index}`;
 		},
 		createChallenge() {
 			const data = this.getCreateChallengeInfo;
@@ -99,7 +100,7 @@ export default {
 
 <style scoped lang="scss">
 #AvatarList {
-	padding: 0 20px 50px 20px;
+	padding: 0 20px 84px 20px;
 
 	.card_container {
 		/deep/ .vs-card {
