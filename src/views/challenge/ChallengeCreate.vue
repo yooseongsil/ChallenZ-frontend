@@ -56,7 +56,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import routeMixin from '../../mixins/routeMixin';
-import axios from 'axios';
+// import axios from 'axios';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import Typography from '../../components/Typography';
@@ -114,7 +114,8 @@ export default {
 			this.challengeTitle = challengeNameList[challengeName];
 		},
 		handleButtonClick() {
-			return this.getTutorialPassed ? this.createChallenge() : this.next();
+			//this.getTutorialPassed ?  : this.next();
+			return this.next();
 		},
 		next() {
 			if (this.challengeTitle && this.startTime && this.startDate && this.endTime && this.endDate) {
@@ -134,23 +135,23 @@ export default {
 				this.disabled = true;
 			}
 		},
-		createChallenge() {
-			const data = {
-				// dev용
-				avatarUrl: 'https://render-image.zepeto.io/images/?key=39mqExscZJUSY63z95',
-				title: this.challengeTitle,
-				startAt: dayjs(this.startDate + this.startAt)
-					.utc()
-					.format(),
-				endAt: dayjs(this.endDate + this.endAt)
-					.utc()
-					.format(),
-			};
-			axios
-				.post('/challenge', data)
-				.then(res => console.log(res))
-				.catch(err => console.log(err));
-		},
+		// createChallenge() {
+		// 	const data = {
+		// 		// dev용
+		// 		avatarUrl: 'https://render-image.zepeto.io/images/?key=39mqExscZJUSY63z95',
+		// 		title: this.challengeTitle,
+		// 		startAt: dayjs(this.startDate + this.startAt)
+		// 			.utc()
+		// 			.format(),
+		// 		endAt: dayjs(this.endDate + this.endAt)
+		// 			.utc()
+		// 			.format(),
+		// 	};
+		// 	axios
+		// 		.post('/challenge', data)
+		// 		.then(res => console.log(res))
+		// 		.catch(err => console.log(err));
+		// },
 	},
 	components: { BottomButton, Typography },
 };
