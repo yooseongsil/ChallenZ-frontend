@@ -11,7 +11,6 @@
 					</div>
 				</div>
 				<div class="flex align-items-center">
-					<!-- todo: badge badge-position="top-right" -->
 					<vs-avatar v-if="isHomePage && getTutorialPassed" color="#FFFFFF" size="32">
 						<Icon name="IconMoreMenu" />
 					</vs-avatar>
