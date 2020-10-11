@@ -28,6 +28,9 @@
 						</p>
 					</div>
 				</template>
+				<template v-if="list.unread" #buttons>
+					<Icon name="IconNew"></Icon>
+				</template>
 				<template #interactions>
 					<div class="IconTrash">
 						<Icon name="IconTrash" />
@@ -144,6 +147,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/deep/ .vs-card__buttons {
+	position: absolute;
+	right: -5px;
+	top: -5px;
+}
 /deep/ .vs-card {
 	margin: 0 auto !important;
 }
