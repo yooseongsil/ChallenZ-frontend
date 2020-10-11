@@ -79,7 +79,7 @@ export default {
 		},
 	},
 	created() {
-		this.targetDate = new Date().getUTCDate() + 1;
+		this.targetDate = new Date().getUTCDate();
 		this.targetYear = new Date().getUTCFullYear();
 		this.targetMonth = new Date().getUTCMonth() + 1;
 		this.targetDay = new Date().getUTCDay();

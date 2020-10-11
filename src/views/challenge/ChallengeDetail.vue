@@ -50,7 +50,7 @@
 									block
 									size="xl"
 									style="margin: 0"
-									:border="index !== 1"
+									:border="index !== 2"
 									:loading="triggeredIndex === index"
 								>
 									{{ trigger }}
