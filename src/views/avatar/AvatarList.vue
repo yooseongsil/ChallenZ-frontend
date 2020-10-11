@@ -10,7 +10,7 @@
 					vs-align="center"
 					w="6"
 				>
-					<vs-card :class="{ active: avatarActive[index] === true }" @click="clickAvatar(index, list._id)">
+					<vs-card :class="{ active: index === activeAvatarIndex }" @click="clickAvatar(index, list._id)">
 						<template #title>
 							<h3>{{ list.name }}</h3>
 						</template>
@@ -45,22 +45,24 @@ export default {
 	mixins: [routeMixin],
 	data: () => ({
 		avatarList: null,
-		avatarActive: [],
+		// avatarActive: [],
+		activeAvatarIndex: null,
 	}),
 	computed: {
 		...mapGetters(['getCreateChallengeInfo']),
 	},
 	async created() {
-		this.avatarActive.fill(false);
+		// this.avatarActive.fill(false);
 		this.setHeaderTitle('Choose your Zavartar');
 		await this.getAvatarList();
-		this.avatarActive = new Array(this.avatarList.length);
+		// this.avatarActive = new Array(this.avatarList.length);
 	},
 	methods: {
 		...mapMutations(['setHeaderTitle', 'setCreateChallengeInfo']),
-		clickAvatar(no, _id) {
-			this.avatarActive.fill(false);
-			this.avatarActive[no] = true;
+		clickAvatar(index, _id) {
+			this.activeAvatarIndex = index;
+			// this.avatarActive.fill(false);
+			// this.avatarActive[no] = true;
 			this.setCreateChallengeInfo({ ...this.getCreateChallengeInfo, avatarId: _id });
 		},
 		createChallenge() {
@@ -92,12 +94,15 @@ export default {
 	padding: 0 20px 50px 20px;
 	.vs-card-content {
 		margin: 8px;
+		&.active {
+			/deep/ .vs-card {
+				border: 3px solid #5846ef !important;
+			}
+		}
+
 		/deep/ .vs-card {
 			max-width: 100% !important;
-			&.active {
-				border: 1px solid red !important;
-			}
-			.vs-card__img {
+			&__img {
 				background: #f2f2f2;
 			}
 		}
