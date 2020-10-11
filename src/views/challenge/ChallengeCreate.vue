@@ -44,7 +44,7 @@
 					</typography>
 				</vs-col>
 				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="6">
-					<BottomButton @click="handleButtonClick">
+					<BottomButton @click="next">
 						<vs-button block size="xl">Next</vs-button>
 					</BottomButton>
 				</vs-col>
@@ -56,7 +56,6 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import routeMixin from '../../mixins/routeMixin';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import Typography from '../../components/Typography';
@@ -113,43 +112,27 @@ export default {
 			};
 			this.challengeTitle = challengeNameList[challengeName];
 		},
-		handleButtonClick() {
-			return this.getTutorialPassed ? this.createChallenge() : this.next();
-		},
 		next() {
 			if (this.challengeTitle && this.startTime && this.startDate && this.endTime && this.endDate) {
 				this.disabled = false;
+				const [startHour, startMinute] = this.startTime.split(':');
+				const [endHour, endMinute] = this.endTime.split(':');
 				this.setCreateChallengeInfo({
 					...this.getCreateChallengeInfo,
 					title: this.challengeTitle,
-					startAt: dayjs(this.startDate + this.startAt)
-						.utc()
-						.format(),
-					endAt: dayjs(this.endDate + this.endAt)
-						.utc()
-						.format(),
+					startAt: dayjs(this.startDate)
+						.hour(startHour)
+						.minute(startMinute)
+						.utc(),
+					endAt: dayjs(this.endDate)
+						.hour(endHour)
+						.minute(endMinute)
+						.utc(),
 				});
 				this.$_routeMixin_go_page('/avatar/list');
 			} else {
 				this.disabled = true;
 			}
-		},
-		createChallenge() {
-			const data = {
-				// dev용
-				avatarUrl: 'https://render-image.zepeto.io/images/?key=39mqExscZJUSY63z95',
-				title: this.challengeTitle,
-				startAt: dayjs(this.startDate + this.startAt)
-					.utc()
-					.format(),
-				endAt: dayjs(this.endDate + this.endAt)
-					.utc()
-					.format(),
-			};
-			axios
-				.post('/challenge', data)
-				.then(res => console.log(res))
-				.catch(err => console.log(err));
 		},
 	},
 	components: { BottomButton, Typography },
