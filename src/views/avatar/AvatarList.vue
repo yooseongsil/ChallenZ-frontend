@@ -10,7 +10,10 @@
 					vs-align="center"
 					w="6"
 				>
-					<vs-card :class="{ active: index === activeAvatarIndex }" @click="clickAvatar(index, list._id)">
+					<vs-card
+						:class="({ active: index === activeAvatarIndex }, avatarRandomBgColor())"
+						@click="clickAvatar(index, list._id)"
+					>
 						<template #title>
 							<h3>{{ list.name }}</h3>
 						</template>
@@ -65,6 +68,9 @@ export default {
 			// this.avatarActive[no] = true;
 			this.setCreateChallengeInfo({ ...this.getCreateChallengeInfo, avatarId: _id });
 		},
+		avatarRandomBgColor() {
+			return `bg-${_.random(0, 4)}`;
+		},
 		createChallenge() {
 			const data = this.getCreateChallengeInfo;
 			axios
@@ -99,12 +105,36 @@ export default {
 				border: 3px solid #5846ef !important;
 			}
 		}
+		&.bg {
+			&-0 {
+				/deep/ .vs-card__img {
+					background: #facaca;
+				}
+			}
+			&-1 {
+				/deep/ .vs-card__img {
+					background: #facae9;
+				}
+			}
+			&-2 {
+				/deep/ .vs-card__img {
+					background: #f0cafa;
+				}
+			}
+			&-3 {
+				/deep/ .vs-card__img {
+					background: #dccafa;
+				}
+			}
+			&-4 {
+				/deep/ .vs-card__img {
+					background: #ffdec6;
+				}
+			}
+		}
 
 		/deep/ .vs-card {
 			max-width: 100% !important;
-			&__img {
-				background: #f2f2f2;
-			}
 		}
 	}
 
