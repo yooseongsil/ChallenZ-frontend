@@ -1,3 +1,3 @@
-import './vusax';
+import './vuesax';
 import './scrollTo';
 import './awesomeSwiper';
