@@ -179,7 +179,7 @@ export default {
 		&_text {
 			position: relative;
 			top: 50%;
-			transform: translateY(-30%);
+			transform: translateY(-50%);
 			font-size: 11px;
 			line-height: 13px;
 		}
