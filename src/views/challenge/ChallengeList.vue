@@ -9,7 +9,14 @@
 			<button type="button" class="btn btn_next" @click="clickNext"></button>
 		</header>
 		<div class="challengeList_body">
-			<vs-card v-for="list in challengeList" :key="list._id" type="3" class="mb-20" @click="goDetail(list._id)">
+			<vs-card
+				v-for="list in challengeList"
+				:key="list._id"
+				type="3"
+				class="card_container mb-20"
+				:class="avatarRandomBgColor(list.avatar.name)"
+				@click="goDetail(list._id)"
+			>
 				<template #title>
 					<h3>{{ list.title }}</h3>
 				</template>
@@ -83,6 +90,10 @@ export default {
 		this.checkDay();
 	},
 	methods: {
+		avatarRandomBgColor(name) {
+			const index = name.length % 5;
+			return `bg-${index}`;
+		},
 		goDetail(id) {
 			this.$_routeMixin_go_page(`/challenge/detail/${id}`);
 		},
@@ -104,7 +115,7 @@ export default {
 					this.targetDay = 'Thu';
 					break;
 				case 5:
-					this.targetDay = 'Fir';
+					this.targetDay = 'Fri';
 					break;
 				case 6:
 					this.targetDay = 'Sat';
@@ -134,7 +145,8 @@ export default {
 			axios
 				.get(`challengeList/${targetDate}`)
 				.then(res => {
-					this.challengeList = res.data;
+					const legacyAvatarList = ['강북멋쟁이', 'V'];
+					this.challengeList = [...res.data].filter(data => !legacyAvatarList.includes(data.avatar.name));
 				})
 				.catch(err => console.log(err));
 		},
@@ -157,6 +169,48 @@ export default {
 /deep/ .vs-card {
 	margin: 0 auto !important;
 }
+
+.card_container {
+	/deep/ .vs-card {
+		height: 200px;
+		&__img {
+			img {
+				transform: translateY(60px);
+				width: 200%;
+				min-width: auto;
+			}
+		}
+	}
+
+	&.bg {
+		&-0 {
+			/deep/ .vs-card__img {
+				background: #facaca;
+			}
+		}
+		&-1 {
+			/deep/ .vs-card__img {
+				background: #facae9;
+			}
+		}
+		&-2 {
+			/deep/ .vs-card__img {
+				background: #f0cafa;
+			}
+		}
+		&-3 {
+			/deep/ .vs-card__img {
+				background: #dccafa;
+			}
+		}
+		&-4 {
+			/deep/ .vs-card__img {
+				background: #ffdec6;
+			}
+		}
+	}
+}
+
 /deep/ .vs-card__img {
 	width: 55%;
 }
@@ -229,8 +283,8 @@ export default {
 		background: #fff;
 		padding: 8px 10px;
 	}
-	/deep/ .vs-card__img {
-		background: #f2f2f2;
-	}
+	///deep/ .vs-card__img {
+	//	background: #f2f2f2;
+	//}
 }
 </style>
