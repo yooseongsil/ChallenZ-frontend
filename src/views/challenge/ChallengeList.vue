@@ -118,6 +118,7 @@ export default {
 				this.targetDayNumber = 6;
 			}
 			this.checkDay();
+			this.getChallengeList();
 		},
 		clickNext() {
 			this.targetDayNumber = this.targetDayNumber + 1;
@@ -126,12 +127,13 @@ export default {
 				this.targetDayNumber = 0;
 			}
 			this.checkDay();
+			this.getChallengeList();
 		},
 		getChallengeList() {
+			const targetDate = dayjs(`${this.targetYear}-${this.targetMonth}-${this.targetDate}`).format();
 			axios
-				.get('challengeList')
+				.get(`challengeList/${targetDate}`)
 				.then(res => {
-					console.log(res);
 					this.challengeList = res.data;
 				})
 				.catch(err => console.log(err));
