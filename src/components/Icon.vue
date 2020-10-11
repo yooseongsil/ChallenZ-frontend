@@ -7,6 +7,7 @@
 <script>
 import IconMoreMenu from '@/assets/images/icon/more-menu.svg?inline';
 import PlusImage from '@/assets/images/plus-image.svg?inline';
+import IconNew from '@/assets/images/new-icon.svg?inline';
 import IconRightArrow from '@/assets/images/icon/right-arrow.svg?inline';
 import IconTrash from '@/assets/images/icon/icon-trash.svg?inline';
 import IconSend from '@/assets/images/icon/icon-send.svg?inline';
@@ -86,6 +87,7 @@ export default {
 		IconRightArrow,
 		IconTrash,
 		IconSend,
+		IconNew,
 	},
 };
 </script>

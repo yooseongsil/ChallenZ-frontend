@@ -78,8 +78,15 @@ export default {
 	mounted() {
 		this.getChallengeDetail();
 		this.getTriggerList();
+		this.readMessage(this.$route.params.id);
 	},
 	methods: {
+		readMessage(_id) {
+			const data = {
+				challengeId: _id,
+			};
+			axios.post('/challenge/read', data).then(res => console.log(res).catch(err => console.log(err)));
+		},
 		createMessage(trigger) {
 			const data = {
 				challengeId: this.$route.params.id,
