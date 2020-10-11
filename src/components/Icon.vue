@@ -10,6 +10,7 @@ import PlusImage from '@/assets/images/plus-image.svg?inline';
 import IconRightArrow from '@/assets/images/icon/right-arrow.svg?inline';
 import IconTrash from '@/assets/images/icon/icon-trash.svg?inline';
 import IconSend from '@/assets/images/icon/icon-send.svg?inline';
+import ZAvatar from '@/assets/images/z-avatar.svg?inline';
 
 import { colors } from '@/components/color';
 
@@ -86,6 +87,7 @@ export default {
 		IconRightArrow,
 		IconTrash,
 		IconSend,
+		ZAvatar,
 	},
 };
 </script>
