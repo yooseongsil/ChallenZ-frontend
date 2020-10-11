@@ -1,22 +1,39 @@
 <template>
 	<div id="app">
-		<Header />
-		<div class="main_grid_component center grid">
-			<vs-row>
-				<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
-					<router-view />
-				</vs-col>
-			</vs-row>
-		</div>
+		<template v-if="!isSplash">
+			<Splash />
+		</template>
+		<template v-else>
+			<Header />
+			<div class="main_grid_component center grid">
+				<vs-row>
+					<vs-col vs-type="flex" vs-justify="center" vs-align="center" w="12">
+						<router-view />
+					</vs-col>
+				</vs-row>
+			</div>
+		</template>
+
 		<!--		<Footer />-->
 	</div>
 </template>
 
 <script>
 import Header from '@/layouts/Header';
+import Splash from '@/components/Splash';
 // import Footer from '@/layouts/Footer';
 
 export default {
+	data: () => ({
+		isSplash: false,
+	}),
+	created() {
+		if (!this.isSplash) {
+			setTimeout(() => {
+				this.isSplash = true;
+			}, 2000);
+		}
+	},
 	mounted() {
 		if (localStorage.getItem('tutorialPassed')) {
 			this.$store.commit('setTutorialPassed', true);
@@ -24,6 +41,7 @@ export default {
 	},
 	components: {
 		Header,
+		Splash,
 		// Footer,
 	},
 };
