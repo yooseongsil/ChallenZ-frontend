@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="TutorialChallengeDetail" ref="TutorialChallengeDetail">
 		<vs-row align="center" justify="center">
 			<vs-col vs-type="flex" vs-align="center" w="11">
 				<vs-row>
@@ -10,10 +10,10 @@
 								:class="{ 'visibility-hidden': !showAvatar(index) }"
 								size="40"
 								circle
-								style="min-width: 40px; filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.227437));"
+								style="min-width: 40px"
 								class="mr-12"
 							>
-								<Icon name="ZAvatar" />
+								<img src="https://vuesax.com/avatars/avatar-4.png" alt="" />
 							</vs-avatar>
 							<vs-row>
 								<!-- Z chat -->
@@ -56,7 +56,6 @@
 											style="width: 116px"
 										>
 											<vs-card
-												class="tutorial_card_container"
 												@click="
 													$_routeMixin_go_page(
 														`/challenge/create?challenge_name=${option.title}`,
@@ -147,11 +146,11 @@ export default {
 		taskTypeOption() {
 			return [
 				{
-					image: 'https://render-cdn.zepeto.io/20201011/01/39mqKKsd4jTx5kMaqd',
+					image: 'https://vuesax.com/avatars/avatar-4.png',
 					title: 'Workout',
 				},
 				{
-					image: 'https://render-cdn.zepeto.io/20201011/01/39mqyTsd4kd8oASSJ3',
+					image: 'https://vuesax.com/avatars/avatar-5.png',
 					title: 'Study',
 				},
 				{
@@ -177,6 +176,8 @@ export default {
 			const zList = this.tutorialItems[0].Z;
 			await this.handleLoop(zList, 'Z');
 			await this.handleShowAnswerButton(zList.length);
+			const screenH = window.innerHeight;
+			this.$refs.TutorialChallengeDetail.style.height = screenH - 150 + 'px';
 		},
 		async handleLoop(list, key) {
 			await list.forEach((item, zIndex) => {
@@ -210,8 +211,8 @@ export default {
 					this.showAnswerButton = false;
 				}, 1000 * zList.length);
 			}
-
 			// todo: scrollToEnd
+			this.$refs.TutorialChallengeDetail.scrollTop = this.$refs.TutorialChallengeDetail.scrollHeight;
 		},
 	},
 	components: {
@@ -225,20 +226,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tutorial_card_container {
-	/deep/ .vs-card {
-		&__img {
-			background: #fff1f9;
-			height: 115px;
-
-			img {
-				transform: translateY(24px);
-				width: 114%;
-			}
-		}
-	}
+#TutorialChallengeDetail {
+	/*overflow-x: hidden;*/
+	/*overflow-y: auto;*/
+	padding-bottom: 60px;
 }
-
 .z-chat-list-item {
 	//display: inline-block;
 	//margin-right: 10px;
