@@ -10,10 +10,10 @@
 								:class="{ 'visibility-hidden': !showAvatar(index) }"
 								size="40"
 								circle
-								style="min-width: 40px"
+								style="min-width: 40px; filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.227437));"
 								class="mr-12"
 							>
-								<img src="https://vuesax.com/avatars/avatar-4.png" alt="" />
+								<Icon name="ZAvatar" />
 							</vs-avatar>
 							<vs-row>
 								<!-- Z chat -->
@@ -56,6 +56,7 @@
 											style="width: 116px"
 										>
 											<vs-card
+												class="tutorial_card_container"
 												@click="
 													$_routeMixin_go_page(
 														`/challenge/create?challenge_name=${option.title}`,
@@ -146,11 +147,11 @@ export default {
 		taskTypeOption() {
 			return [
 				{
-					image: 'https://vuesax.com/avatars/avatar-4.png',
+					image: 'https://render-cdn.zepeto.io/20201011/01/39mqKKsd4jTx5kMaqd',
 					title: 'Workout',
 				},
 				{
-					image: 'https://vuesax.com/avatars/avatar-5.png',
+					image: 'https://render-cdn.zepeto.io/20201011/01/39mqyTsd4kd8oASSJ3',
 					title: 'Study',
 				},
 				{
@@ -224,6 +225,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tutorial_card_container {
+	/deep/ .vs-card {
+		&__img {
+			background: #fff1f9;
+			height: 115px;
+
+			img {
+				transform: translateY(24px);
+				width: 114%;
+			}
+		}
+	}
+}
+
 .z-chat-list-item {
 	//display: inline-block;
 	//margin-right: 10px;
