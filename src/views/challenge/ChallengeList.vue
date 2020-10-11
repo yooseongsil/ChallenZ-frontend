@@ -160,6 +160,8 @@ export default {
 }
 /deep/ .vs-card__text {
 	padding-top: 25px !important;
+	position: relative;
+	width: 45%;
 }
 #ChallengeList {
 	padding: 0 20px;
@@ -177,9 +179,8 @@ export default {
 	}
 	.challengeList_body {
 		&_text {
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%);
+			position: absolute;
+			bottom: 20px;
 			font-size: 11px;
 			line-height: 13px;
 		}
