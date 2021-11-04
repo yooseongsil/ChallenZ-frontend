@@ -8,7 +8,6 @@
   - Seongsil Yoo(Front-End)
 
 ## ChallenZ (* Mobile Only!)
-- website: https://master.d9v2bkpgnku6j.amplifyapp.com/
 - demo: https://youtu.be/NEsonr9Th8A
 - presentation : https://youtu.be/VQnBDI7W_7o
 
